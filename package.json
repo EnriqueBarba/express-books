@@ -1,11 +1,11 @@
 {
-  "name": "lesson-base-crud",
+  "name": "express-books",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "DEBUG=ex-crud:* nodemon -e hbs,js,css app.js",
+    "dev": "nodemon -e hbs,js,css app.js",
     "seeds": "node ./bin/seeds"
   },
   "author": "",
