@@ -20,7 +20,12 @@ const celebrities = [
     }
 ]
 
-Celebrity.create(celebrities)
-   .then((celebr) => console.info(`${celebr.length} new celebrities added to the database`))
-   .catch(error => console.error(error))
-   .then(() => mongoose.connection.close());
+Celebrity.deleteMany({})
+.then( () =>  console.log('Celebrities deleted') )
+ .then( () => {
+     return Celebrity.create(celebrities)
+   .then((celebr) => console.info(`${celebr.length} new celebritie/s added to the database`))
+ })
+.catch( error => console.log(error))
+.then(() => mongoose.connection.close());
+

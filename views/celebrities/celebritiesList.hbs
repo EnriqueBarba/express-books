@@ -1,8 +1,12 @@
+<a href="/celebrity/create" class="btn btn-success">Add Celebrity</a>
 <div class="row">
-{{#each celebrities}}
-<div class="col col-6 mb-3">
-    <h5>{{this.name}}</h5>
-    <a href="/celebrity/{{this.id}}">See details</a>
+    {{#each celebrities}}
+    <div class="card col col-6 mb-3">
+        <div class="card-body">
+            <h5>{{this.name}}</h5>
+            <a href="/celebrity/{{this.id}}">See details</a>
+        </div>
+    </div>
+    {{/each}}
 </div>
-{{/each}}
-</div>
+<a href="/celebrity/create" class="btn btn-success">Add Celebrity</a>

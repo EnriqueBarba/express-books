@@ -32,16 +32,47 @@ module.exports.celebrityDetails = (req, res, next) => {
 
 module.exports.editCelebrity = (req, res, next) => {
     console.log(`editCelebritie`)
+    Celebrity.findById(req.params.id)
+    .then( celebrity => {
+        res.render('celebrities/celebrityForm', {celebrity})
+    })
+    .catch( err => {
+        next(err)
+    })
 };
 
 module.exports.doEditCelebrity = (req, res, next) => {
     console.log(`doEditCelebritie`)
+
+    const id = req.params.id;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        next(createError(404));
+    } else {
+        Celebrity.findByIdAndUpdate(id, req.body, {runValidators:true, new: true })
+            .then(celebrity => {
+                console.log(celebrity)
+                res.render('celebrities/celebrityDetails', {celebrity})
+            })
+            .catch(
+                error => next(error)
+            )
+    }
+
 };
 
 module.exports.createCelebrity = (req, res, next) => {
     console.log(`createCelebritie`)
+    res.render('celebrities/celebrityForm')
 };
 
 module.exports.doCreateCelebrity = (req, res, next) => {
     console.log(`doCreateCelebritie`)
+  const celebrity = new Celebrity(req.body);
+  celebrity.save()
+  .then(
+      res.render('index', {
+        title: 'Celebrities created! =D'
+    }) 
+  )
+  .catch( error => next(error)) 
 };
